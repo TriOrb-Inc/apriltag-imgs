@@ -106,7 +106,7 @@ def gen_apriltags_svg(tag_images, tag_size, margin, cols):
                 _id = f'{tag_name}-{_x}-{_y}'
                 svg_text += f'\t<rect width="{pix_width}" height="{pix_height}" x="{x+_x*pix_width}" y="{y+_y*pix_height}" id="{_id}" style="fill:{_rgb_hex};stroke:#000000;stroke-width:0.0"/>\n'
         # tag_idを描画
-        svg_text += f'\t<text x="{x+tag_size/2}" y="{y+tag_size+(0.8*margin)}" font-size="{margin*0.8}" font-family="monospace" text-anchor="middle" fill="#BEFFBE">{tag_name}</text>\n'
+        svg_text += f'\t<text x="{x+tag_size/2}" y="{y+tag_size+(0.8*margin)}" font-size="{margin*0.8}" font-family="monospace" text-anchor="middle" fill="#5EEF5E">{tag_name}</text>\n'
         # 枠を描画
         svg_text += f'\t<rect width="{tag_size+margin+margin}" height="{tag_size+margin+margin}" x="{x-margin}" y="{y-margin}" fill="none" stroke="#888888" stroke-width="1"/>\n'
         
