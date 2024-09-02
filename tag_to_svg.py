@@ -101,8 +101,8 @@ def gen_apriltags_svg(tag_images, tag_size, margin, cols):
         print(f'{tag_name}: posiiton ({x}, {y}), pix_size ({pix_width}, {pix_height})')
         for _y in range(tag_image.shape[0]):
             for _x in range(tag_image.shape[1]):
-                _rgba = gen_rgba(tag_image[_x, _y])
-                _rgb_hex = '#' + ''.join([f'{v:02x}' for v in tag_image[_x, _y][:3]])
+                _rgba = gen_rgba(tag_image[_y, _x])
+                _rgb_hex = '#' + ''.join([f'{v:02x}' for v in tag_image[_y, _x][:3]])
                 _id = f'{tag_name}-{_x}-{_y}'
                 svg_text += f'\t<rect width="{pix_width}" height="{pix_height}" x="{x+_x*pix_width}" y="{y+_y*pix_height}" id="{_id}" style="fill:{_rgb_hex};stroke:#000000;stroke-width:0.0"/>\n'
         # tag_idを描画
@@ -146,21 +146,6 @@ def main():
         fp.write(apriltags_svg)
 
     print(f'Output SVG file: {args.out_file} with size: {args.out_file}')
-
-    exit(0)
-    with Image.open(tag_file, 'r') as im:
-
-        width, height = im.size
-        pix_vals = im.load()
-        
-        apriltag_svg = gen_apriltag_svg(width, height, pix_vals, svg_size)
-
-    assert apriltag_svg is not None, 'Error: Failed to create SVG.'
-
-    with open(out_file, 'w') as fp:
-        fp.write(apriltag_svg)
-
-    print(f'Output SVG file: {out_file} with size: {svg_size}')
 
 if __name__ == "__main__":
     main()
