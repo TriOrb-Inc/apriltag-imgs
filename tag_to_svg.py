@@ -22,7 +22,8 @@ parser = argparse.ArgumentParser(
     epilog='Example: "python tag_to_svg.py tagStandard52h13/tag52_13_00007.png tag52_13_00007.svg --size=20mm"'
 )
 parser.add_argument(
-    '--tag_family', type=str, choices=['tag16h5', 'tag25h9', 'tag36h11', 'tagCircle21h7', 'tagCircle49h12', 'tagCustom48h12', 'tagStandard41h12', 'tagStandard52h13'],
+    '--tag_family', type=str, choices=['tag16h5', 'tag25h9', 'tag36h11', 'tagCircle21h7', 'tagCircle49h12', 'tagCustom48h12', 'tagStandard41h12', 'tagStandard52h13',
+                                        'aruco4', 'aruco5', 'aruco6', 'aruco7'],
     default='tag36h11',
     help='The apriltag family to use for the tag generation.'
 )
@@ -136,7 +137,7 @@ def main():
         if os.path.exists(tag_file) == False:
             print(f'Error: Could not find tag file: {tag_file}')
             continue
-        pil_image = Image.open(tag_file)
+        pil_image = Image.open(tag_file).convert('RGBA')
         tag_images[tag_name] = np.array(pil_image)
     
     apriltags_svg = gen_apriltags_svg(tag_images, args.tag_size, args.margin, args.cols)
