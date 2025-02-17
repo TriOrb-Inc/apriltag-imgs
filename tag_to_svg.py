@@ -47,6 +47,10 @@ parser.add_argument(
     '--out_file', type=str, default='output.svg', 
     help='The path to the SVG output file.'
 )
+parser.add_argument(
+    '--step', type=int, default=1, 
+    help='The step ID of the apriltag to generate.'
+)
 
 '''
 parser.add_argument(
@@ -122,7 +126,7 @@ def main():
         tag_ids = [int(id) for id in args.tag_id.split(',')]
     elif '-' in args.tag_id:
         start, end = args.tag_id.split('-')
-        tag_ids = [id for id in range(int(start), int(end)+1)]
+        tag_ids = [id for id in range(int(start), int(end)+1, args.step)]
     else:
         tag_ids = [int(args.tag_id)]
 
